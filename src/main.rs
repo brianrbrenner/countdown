@@ -1,5 +1,6 @@
-use std::thread::sleep_ms;
+use std::thread::sleep;
 use std::env::args;
+use std::time::Duration;
 
 static ESC: &str = "\x1b[";
 static CLEAR: &str = "2J";
@@ -23,11 +24,11 @@ fn parse_arg(arg: Option<String>) -> u32 {
     }
 }
 
-fn total_to_min_sec(total: u32) -> (u32, u32) {
-    let min = total / 60;
-    let sec = total - min * 60;
+pub(crate) fn total_to_min_sec(total: u32) -> (u32, u32) {
+    let _min = total / 60;
+    let _sec = total - _min * 60;
 
-    return (min, sec);
+    return (_min, _sec);
 }
 
 fn main() {
@@ -38,8 +39,8 @@ fn main() {
     let second_arg: Option<String> = options.next();
     let seconds = parse_arg(second_arg);
 
-    let mut total = minutes * 60 + seconds;
-    let (min, sec) = total_to_min_sec(total);
+    let total = minutes * 60 + seconds;
+    let (_min, _sec): (u32, u32) = total_to_min_sec(total);
 
     loop {
         for counter in (1..=total).rev() {
@@ -50,7 +51,7 @@ fn main() {
                 ESC, RESET_CURSOR
             );
             println!("{:02}:{:02}", min, sec);
-            sleep_ms(1000);
+            sleep(Duration::from_millis(1000 as u64));
         }
         break;
     }
