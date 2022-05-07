@@ -1,4 +1,6 @@
 # countdown
+
+Link to comparison code: https://github.com/brianrbrenner/countdown-py
 Command line countdown timer written in Rust.
 ``` git clone https://github.com/brianrbrenner/countdown ```
 then ``` cargo run [ min sec ] ```
